@@ -23,15 +23,8 @@ import os
 import ctypes
 import platform
 
-def enable_virtual_terminal_processing():
-    if platform.system() == "Windows":
-        kernel32 = ctypes.WinDLL('kernel32')
-        hStdOut = kernel32.GetStdHandle(-11)
-        mode = ctypes.c_ulong()
-        kernel32.GetConsoleMode(hStdOut, ctypes.byref(mode))
-        mode.value |= 4  # ENABLE_VIRTUAL_TERMINAL_PROCESSING is 0x0004
-        kernel32.SetConsoleMode(hStdOut, mode)
-    else:
+def enable_virtual_terminal_processing(turnOn: bool):
+    if not turnOn:
         COLOR_RESET=''
         COLOR_INT=''
         COLOR_FLOAT=''
@@ -40,7 +33,16 @@ def enable_virtual_terminal_processing():
         COLOR_OK=''
         COLOR_BAD=''
         COLOR_ALERT=''
-
+        return
+    
+    if platform.system() == "Windows":
+        kernel32 = ctypes.WinDLL('kernel32')
+        hStdOut = kernel32.GetStdHandle(-11)
+        mode = ctypes.c_ulong()
+        kernel32.GetConsoleMode(hStdOut, ctypes.byref(mode))
+        mode.value |= 4  # ENABLE_VIRTUAL_TERMINAL_PROCESSING is 0x0004
+        kernel32.SetConsoleMode(hStdOut, mode)
+    
 def colorize(arg: any) -> str:
     """
     Determines the type of the argument and returns a colorized string based on its type.
