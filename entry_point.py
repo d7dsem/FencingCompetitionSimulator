@@ -39,17 +39,13 @@ if __name__ == "__main__":
     print(fighter2)
     print()
     
-    # print(colorize("Emulate one clash:"))
-    # rv = emul_clash(fighter1,fighter2,scoring_system)
-    # print()
-    
-    
-    # rv = emul_fight_frame(f1=fighter1,f2=fighter2,verbose=True)
-    
+   
     scoring_core = ClashResultsPoints(clear_hit_value=3, double_hit_value=1, afterblow_coast=2)
     
-    emul_fight(f1=fighter1, f2=fighter2, scoring_core=scoring_core, win_score=10, rule_set=hema_rule_set_v1, verbose=True)    
-    print()
+    for i in range(0, 10, 1):
+        print(f"{colorize(i+1):2} ", end = " ")
+        emul_fight(f1=fighter1, f2=fighter2, scoring_core=scoring_core, win_score=10, rule_set=hema_rule_set_v1, verbose=True)    
+        print()
     
     bye_bye()
     
