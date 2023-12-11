@@ -8,7 +8,7 @@ class Score:
         self.s1=s1
         self.s2=s2
     def __str__(self) -> str:
-        return f"{colorize(self.s1)}:{colorize(self.s2)}"
+        return f"SCORE: {colorize(self.s1)}:{colorize(self.s2)}"
 
 class ClashResult(Enum):
     """

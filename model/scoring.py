@@ -21,7 +21,7 @@ class ClashResultsPoints:
         self.afterblow_value = afterblow_coast
 
     def __str__(self):
-        return f"Clash Result Points (Clear Hit: {self.clear_hit_value} Afterblow: {self.afterblow_value}, Double Hit: {self.double_hit_value},)"
+        return f"Clash Result Points (Clear Hit: {self.clear_hit_value} Afterblow: {self.afterblow_value}, Double Hit: {self.double_hit_value})"
 
     def ToPoints(self, r1: ClashResult, r2:ClashResult, eval: Callable[[ClashResult, ClashResult], Tuple[int, int]])->Tuple[int,int]:
         return eval(r1, r2)
