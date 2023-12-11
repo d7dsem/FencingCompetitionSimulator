@@ -12,5 +12,9 @@
 			// "titleBar.activeForeground": "#колір_тексту",
 			// "titleBar.inactiveForeground": "#колір_тексту"
 			},
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": []
 	}
 }
