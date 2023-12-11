@@ -1,6 +1,8 @@
 # Ігнорувати папку налаштувань Visual Studio Code
 .vscode/
 
+.venv/
+
 # Ігнорувати тимчасові файли
 *.tmp
 *.temp
