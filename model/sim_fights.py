@@ -12,18 +12,22 @@ from utility.colorization import colorize
 
 def emul_fight(f1: Fighter, f2: Fighter, scoring_core: ClashResultsPoints, rule_set: Callable[[ClashResult, ClashResult], Tuple[int, int]],win_score: int, verbose: bool) -> Score:
     if verbose:
-        print(f"{colorize('Emulate fight')} till {colorize(win_score)}\n  {scoring_core} ")
-        print()
+        print(f"{colorize('FIGHT EMULATION')} till {colorize(win_score)}\n    {scoring_core}")
 
     cn = 1
     isAllDone = False
+    s1 = 0
+    s2 = 0
     while not isAllDone:
         if verbose:                    
-            print(f"{colorize(cn):3} CLASH EMUL:")
+            print(f"{colorize(cn):3} ", end=" ")
         cn = cn + 1
         
         r1, r2 = emul_clash(f1,f2, verbose)
+        
         clash_points_1, clash_points_2 = scoring_core.ToPoints(r1=r1,r2=r2,eval=rule_set)
+        s1 =s1 + clash_points_1
+        s2 =s2 + clash_points_2
         
         f1.points = f1.points + clash_points_1
         f1.hits.incrTotal()
@@ -37,17 +41,17 @@ def emul_fight(f1: Fighter, f2: Fighter, scoring_core: ClashResultsPoints, rule_
         if clash_points_1==0:
             f2.hits.incrClear()
 
-        isAllDone =  (f1.points >= win_score or f2.points >= win_score)
+        isAllDone =  (s1 >= win_score or s2 >= win_score)
 
         if verbose:
-            print(f"SCORE:  ", end="  ")
-            print(f"{colorize(f1.points)}:{colorize(f2.points)} |", end="   ")
-            if isAllDone:
-                print("FIN", end=" ")
-            print()
+            print(f"[{Score(s1,s2)}]")
+            
+    
+    res = Score(s1, s2)
     
     if verbose:
-        print(f"Emulation completed. Niters={cn}.")
+        print(f"{colorize('EMULATION COMPETED')}: count_clash={colorize(cn) }")
+        print(f"[{res}]")
     
 
     if f1.points > f2.points:
@@ -60,4 +64,4 @@ def emul_fight(f1: Fighter, f2: Fighter, scoring_core: ClashResultsPoints, rule_
         f1.fights.incrDraw()
         f2.fights.incrDraw()
     
-    return Score(f1.points, f2.points)
+    return res
