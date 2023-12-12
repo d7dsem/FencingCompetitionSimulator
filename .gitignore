@@ -1,3 +1,5 @@
+venv/
+
 # Ігнорувати папку налаштувань Visual Studio Code
 .vscode/
 
