@@ -97,7 +97,7 @@ def gen_fighter(hit_chance:float)->Fighter:
     pass
 
 def sim_group(n: int=4)->None:
-    matrix = [['' for _ in range(n)] for _ in range(n)]
+    
     
     hit_chance_range=(0.45, 0.86)
     evade_chance_range=(0.35, 0.75)
@@ -108,18 +108,31 @@ def sim_group(n: int=4)->None:
         print(f"{i:2} {COLOR_OK}{f.id}{COLOR_RESET}\t{f}")
     print()
     
+    matrix = [['' for _ in range(n)] for _ in range(n)]
+    
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                matrix[i][j] = 'Х'
+                
     
     table = PrettyTable()
-    # Define column headers
-    column_headers = ['Col1', 'Col2', 'Col3', 'Col4'] 
-    table.field_names = ['----'] + column_headers
-
-    # Define row headers
-    row_headers = ['Row1', 'Row2', 'Row3', 'Row4']
     
+    max_name_length = max(len(fighter.id) for fighter in fighters)
+    
+    # Define column headers
+    column_headers = [fighter.id.ljust(max_name_length) for fighter in fighters] 
+    table.field_names = ['----'] + column_headers
+    # Define row headers
+    row_headers = [fighter.id for fighter in fighters] 
+    
+
+            
     # Add rows to the table with row headers
     for header, row in zip(row_headers, matrix):
-        table.add_row([header] + row)
+        table.add_row([header.ljust(max_name_length)] + row)
+        # table.add_row([header] + row)
 
     # Visualize the table
     print(table)
+    print()
