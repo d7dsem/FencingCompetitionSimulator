@@ -15,9 +15,9 @@ COLOR_INT=foreground_color(201, 18, 162)
 COLOR_FLOAT=foreground_color(232, 48, 7)
 COLOR_STRING=foreground_color(30, 18, 201)
 
-COLOR_OK=foreground_color(218, 22, 224)
-COLOR_BAD=foreground_color(5, 222, 255)
-COLOR_ALERT=foreground_color(101, 255, 5)
+COLOR_OK=foreground_color(10, 200, 10)
+COLOR_BAD=foreground_color(200, 10, 10)
+COLOR_ALERT=foreground_color(5, 222, 255)
 
 import os
 import ctypes
