@@ -79,7 +79,7 @@ def emul_clash(f1: Fighter, f2: Fighter, verbose: bool) -> Tuple[ClashResult, Cl
             print(f"CLASH RES: ", end="")
             if isDone:
                 # print(f"{f1.id} {colorize(r1)}:{colorize(r2)} {f2.id}")
-                print(f"{colorize(r1)}:{colorize(r2)} ")
+                print(f"{colorize(r1)}:{colorize(r2)} |")
             else:
                 print(f"BUBOOYNYA (0:0)")
                 
