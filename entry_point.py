@@ -1,6 +1,6 @@
 from utility.colorization import *
 
-from model.sim_fights import emul_fight, test_fight_verbose, sim_group
+from model.sim_fights import emul_fight, random_fight, sim_group
 
 
 
@@ -18,7 +18,7 @@ def bye_bye():
 if __name__ == "__main__":
     greeting()
     
-    test_fight_verbose()
+    random_fight(verbose=False)
     
     sim_group()
     

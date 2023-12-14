@@ -11,12 +11,12 @@ def background_color(r, g, b):
         
         
 COLOR_RESET='\033[0m'
-COLOR_INT=foreground_color(201, 18, 162)
-COLOR_FLOAT=foreground_color(232, 48, 7)
-COLOR_STRING=foreground_color(30, 18, 201)
+COLOR_INT=foreground_color(25, 225, 25)
+COLOR_FLOAT=foreground_color(20, 100, 225)
+COLOR_STRING=foreground_color(220, 210, 10)
 
-COLOR_OK=foreground_color(10, 200, 10)
-COLOR_BAD=foreground_color(200, 10, 10)
+COLOR_OK=foreground_color(2, 250, 2)
+COLOR_BAD=foreground_color(250, 2, 2)
 COLOR_ALERT=foreground_color(5, 222, 255)
 
 import os
@@ -43,7 +43,7 @@ def enable_virtual_terminal_processing(turnOn: bool):
         mode.value |= 4  # ENABLE_VIRTUAL_TERMINAL_PROCESSING is 0x0004
         kernel32.SetConsoleMode(hStdOut, mode)
     
-def colorize(arg: any) -> str:
+def colorize(arg) -> str:
     """
     Determines the type of the argument and returns a colorized string based on its type.
 
