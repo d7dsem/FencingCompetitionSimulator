@@ -1,7 +1,12 @@
 from enum import Enum
 from typing import Dict
+import uuid, random
 
 from utility.colorization import colorize, background_color, foreground_color,COLOR_RESET
+
+from utility.name_generation import gen_name
+
+
 
 class Score:
     def __init__(self, s1,s2) -> None:
@@ -44,6 +49,9 @@ class FightsStat:
     def incrLoose(self, incrVal=1):
         self.loose = self.loose + incrVal    
 
+    def __str__(self)->str:
+        return f"win={self.win} draw={self.draw} loose={self.loose}"
+    
 class HitsStat:
     def __init__(self, deal:int, missed:int, clear:int):
         self.deal =  deal
@@ -58,6 +66,9 @@ class HitsStat:
         
     def incrMissed(self, incrVal=1):
         self.missed = self.missed + incrVal
+        
+    def __str__(self)->str:
+        return f"deal={self.deal} clear={self.clear} missed={self.missed}"
 
 StatDict = dict[str,HitsStat]
 
@@ -77,6 +88,33 @@ class Fighter:
         self.fights = fights
         self.points = points
 
-    def __str__(self):
-        return f"Fighter(ID: {self.id}, Hit Chance: {self.hit_chance}, Evade Chance: {self.evade_chance})"
+    def __str__(self)->str:
+        return f"Fighter(ID: {self.id}, Hit Chance: {self.hit_chance}, Evade Chance: {self.evade_chance} Fights: {self.fights}, Hits: {self.hits}, Point:{self.points})"
 
+    @staticmethod
+    def generate_fighter(hit_chance_range, evade_chance_range, id=None):
+        """
+        Static method to generate a Fighter instance. 
+        If 'id' is not provided, it generates a unique id.
+        """
+        # Validate the hit_chance_range and evade_chance_range
+        if (hit_chance_range[0] < 0 or hit_chance_range[1] > 1 or 
+            evade_chance_range[0] < 0 or evade_chance_range[1] > 1):
+            raise ValueError("Hit and evade chances must be between 0 and 1")
+
+        # Generate random hit_chance and evade_chance within the given ranges
+        hit_chance = random.uniform(*hit_chance_range)
+        evade_chance = random.uniform(*evade_chance_range)
+
+        # Generate a unique id if not provided
+        if id is None:
+            id = str(uuid.uuid4())
+            id = gen_name()
+
+        # Initialize hits, fights, and points with default values
+        hits = HitsStat(0,0,0)  
+        fights = FightsStat(0,0,0)
+        points = 0  # Default value
+
+        # Create and return the Fighter instance
+        return Fighter(id, hit_chance, evade_chance, hits, fights, points)
